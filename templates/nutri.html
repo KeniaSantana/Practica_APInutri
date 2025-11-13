@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}{{ receta.name }}{% endblock %}
+
+{% block content %}
+<div class="text-center my-4">
+    <h1>{{ receta.name }}</h1>
+    <img src="{{ receta.imagen }}" alt="{{ receta.name }}" class="img-fluid" style="width:200px;">
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg rounded-4 border-0">
+                <div class="card-body text-center">
+                    <h5>ID: {{ food.name }}</h5>
+                    <p><strong>Marca:</strong> {{ receta.brad }} </p>
+                    <p><strong>Calorias:</strong> {{ receta.calories }} kcal</p>
+                    <p><strong>Proteinas:</strong> {{ receta.protein }}g</p>
+                    <p><strong>Grasas:</strong> {{ receta.fat  }}g</p>
+                    <p><strong>Carbohidratos:</strong> {{ receta.cards  }}g</p>
+                    <a href="{{ url_for('base') }}" class="btn btn-outline-success">Buscar otra Receta </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
