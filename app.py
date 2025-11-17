@@ -2,12 +2,11 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import requests
 
 app = Flask(__name__)
-app.secret_key='X6bcYYVWiKi2VhDRFij4dErDszBeJVsWRe0YFvG9'
+app.secret_key = 'X6bcYYVWiKi2VhDRFij4dErDszBeJVsWRe0YFvG9'
 
 @app.route('/')
 def base():
-    return render_template('inicio.html')
-
+    return render_template('base.html')
 
 @app.route('/search', methods=['POST'])
 def search():
@@ -17,7 +16,7 @@ def search():
         return redirect(url_for('base'))
 
     try:
-        api_key = 'X6bcYYVWiKi2VhDRFij4dErDszBeJVsWRe0YFvG9'  
+        api_key = 'X6bcYYVWiKi2VhDRFij4dErDszBeJVsWRe0YFvG9'
         url = f'https://api.nal.usda.gov/fdc/v1/foods/search?query={receta_name}&api_key={api_key}'
         response = requests.get(url)
 
@@ -29,6 +28,7 @@ def search():
                 return redirect(url_for('base'))
 
             receta = data['foods'][0]
+
             receta_info = {
                 'name': receta.get('description', 'Desconocida'),
                 'brand': receta.get('brandOwner', 'Desconocida'),
@@ -39,6 +39,7 @@ def search():
             }
 
             return render_template('nutri.html', receta=receta_info)
+
         else:
             flash('Error al conectar con la API de recetas. Inténtalo más tarde.', 'error')
             return redirect(url_for('base'))
